@@ -1,0 +1,111 @@
+watch_game:
+  name: Watch Game
+  description: Start watching a specific game on a WLED instance.
+  fields:
+    host:
+      name: WLED Host
+      description: Hostname or IP of the WLED instance.
+      required: true
+      example: "wled.local"
+      selector:
+        text:
+    league:
+      name: League
+      description: League identifier (e.g., nfl, nba, nhl).
+      required: true
+      example: "nfl"
+      selector:
+        text:
+    game_id:
+      name: Game ID
+      description: ESPN game ID to watch.
+      required: true
+      example: "401547417"
+      selector:
+        text:
+
+set_watch_teams:
+  name: Set Watch Teams
+  description: Configure auto-watch teams for a WLED instance.
+  fields:
+    host:
+      name: WLED Host
+      description: Hostname or IP of the WLED instance.
+      required: true
+      example: "wled.local"
+      selector:
+        text:
+    watch_teams:
+      name: Watch Teams
+      description: "List of teams in league:abbr format."
+      required: true
+      example: '["nfl:GB", "nba:MIL"]'
+      selector:
+        object:
+
+test_display:
+  name: Test Display
+  description: Send a test win probability display to Scoreline.
+  fields:
+    pct:
+      name: Win Percentage
+      description: Home team win percentage (0-100).
+      required: true
+      example: 73
+      selector:
+        number:
+          min: 0
+          max: 100
+    league:
+      name: League
+      description: League for team colors.
+      required: false
+      example: "nfl"
+      selector:
+        text:
+    home:
+      name: Home Team
+      description: Home team abbreviation.
+      required: false
+      example: "GB"
+      selector:
+        text:
+    away:
+      name: Away Team
+      description: Away team abbreviation.
+      required: false
+      example: "CHI"
+      selector:
+        text:
+    host:
+      name: WLED Host
+      description: Target a specific instance (omit for all).
+      required: false
+      example: "wled.local"
+      selector:
+        text:
+    home_score:
+      name: Home Score
+      description: Display score for home team.
+      required: false
+      example: 21
+      selector:
+        number:
+          min: 0
+          max: 999
+    away_score:
+      name: Away Score
+      description: Display score for away team.
+      required: false
+      example: 17
+      selector:
+        number:
+          min: 0
+          max: 999
+    period:
+      name: Period
+      description: Display period text.
+      required: false
+      example: "4th"
+      selector:
+        text:

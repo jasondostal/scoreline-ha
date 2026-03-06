@@ -1,0 +1,20 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Scoreline",
+        "description": "Enter the connection details for your Scoreline instance.",
+        "data": {
+          "host": "Host",
+          "port": "Port"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to Scoreline API"
+    },
+    "abort": {
+      "already_configured": "This Scoreline instance is already configured"
+    }
+  }
+}
