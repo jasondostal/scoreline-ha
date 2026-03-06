@@ -6,7 +6,6 @@ import logging
 from datetime import timedelta
 
 import aiohttp
-
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_HOST, CONF_PORT
 from homeassistant.core import HomeAssistant, ServiceCall
@@ -59,7 +58,7 @@ class ScorelineCoordinator(DataUpdateCoordinator):
             instances = await self._fetch("/api/instances")
             return {inst["host"]: inst for inst in instances}
         except aiohttp.ClientError as err:
-            raise UpdateFailed(f"Cannot connect to Scoreline: {err}")
+            raise UpdateFailed(f"Cannot connect to Scoreline: {err}") from err
 
     async def api_post(self, path: str, data: dict | None = None) -> dict:
         """Send a POST request to the Scoreline API."""

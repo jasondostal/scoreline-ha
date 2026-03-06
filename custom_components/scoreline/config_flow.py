@@ -2,14 +2,13 @@
 
 import aiohttp
 import voluptuous as vol
-
 from homeassistant import config_entries
 from homeassistant.const import CONF_HOST, CONF_PORT
 
-from .const import DOMAIN, DEFAULT_PORT
+from .const import DEFAULT_PORT, DOMAIN
 
 
-class ScorelineConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+class ScorelineConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):  # type: ignore[call-arg]
     """Handle a config flow for Scoreline."""
 
     VERSION = 1

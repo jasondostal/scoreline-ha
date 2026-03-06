@@ -1,0 +1,13 @@
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "I", "UP", "S"]
+ignore = [
+    "E501",   # line length (not enforced)
+    "S101",   # assert usage
+]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
