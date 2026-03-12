@@ -32,9 +32,15 @@ WebSocket local push for instant updates. One device per WLED instance. MAC-base
 
 ## Setup
 
-**Settings > Integrations > Add > Scoreline** > enter host + port. Done.
+**Settings > Integrations > Add > Scoreline** > enter host, port, and optionally an API key. Done.
 
 > **Tip:** If HA runs in `network_mode: host`, use your server IP and the mapped port (e.g. `192.168.1.x:8084`). If HA is on the same Docker network, use the container name and internal port (e.g. `scoreline:8080`).
+
+### Authentication
+
+If your Scoreline instance has `API_KEY` configured, enter the same key during setup. The integration sends it as an `X-API-Key` header on all REST and WebSocket requests.
+
+No API key is needed if Scoreline auth is disabled (the default) or if HA connects over a trusted network with proxy header auth.
 
 ## What You Get
 
