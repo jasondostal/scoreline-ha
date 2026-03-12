@@ -6,12 +6,17 @@
         "description": "Enter the connection details for your Scoreline instance.",
         "data": {
           "host": "Host",
-          "port": "Port"
+          "port": "Port",
+          "api_key": "API Key (optional)"
+        },
+        "data_description": {
+          "api_key": "Required only if your Scoreline instance has API_KEY configured."
         }
       }
     },
     "error": {
-      "cannot_connect": "Cannot connect to Scoreline API"
+      "cannot_connect": "Cannot connect to Scoreline API",
+      "invalid_auth": "Invalid API key"
     },
     "abort": {
       "already_configured": "This Scoreline instance is already configured"

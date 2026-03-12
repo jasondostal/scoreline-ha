@@ -5,6 +5,7 @@ from homeassistant.helpers.device_registry import CONNECTION_NETWORK_MAC
 DOMAIN = "scoreline"
 DEFAULT_PORT = 8080
 SCAN_INTERVAL_SECONDS = 30
+CONF_API_KEY = "api_key"
 
 
 def format_mac(mac: str) -> str:

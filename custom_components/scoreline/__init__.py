@@ -11,7 +11,7 @@ from homeassistant.const import CONF_HOST, CONF_PORT
 from homeassistant.core import HomeAssistant, ServiceCall
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
-from .const import DOMAIN, SCAN_INTERVAL_SECONDS
+from .const import CONF_API_KEY, DOMAIN, SCAN_INTERVAL_SECONDS
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -28,7 +28,7 @@ class ScorelineCoordinator(DataUpdateCoordinator):
     }
     """
 
-    def __init__(self, hass: HomeAssistant, host: str, port: int):
+    def __init__(self, hass: HomeAssistant, host: str, port: int, api_key: str = ""):
         super().__init__(
             hass,
             _LOGGER,
@@ -38,14 +38,23 @@ class ScorelineCoordinator(DataUpdateCoordinator):
         self.host = host
         self.port = port
         self.base_url = f"http://{host}:{port}"
+        self._api_key = api_key
         self._ws_task: asyncio.Task | None = None
         self.ws_connected: bool = False
+
+    @property
+    def _headers(self) -> dict[str, str]:
+        """Build request headers, including API key if configured."""
+        if self._api_key:
+            return {"X-API-Key": self._api_key}
+        return {}
 
     async def _fetch(self, path: str) -> dict | list:
         """Fetch a single API endpoint."""
         async with aiohttp.ClientSession() as session:
             async with session.get(
                 f"{self.base_url}{path}",
+                headers=self._headers,
                 timeout=aiohttp.ClientTimeout(total=10),
             ) as resp:
                 if resp.status != 200:
@@ -65,6 +74,7 @@ class ScorelineCoordinator(DataUpdateCoordinator):
         async with aiohttp.ClientSession() as session:
             async with session.post(
                 f"{self.base_url}{path}",
+                headers=self._headers,
                 json=data,
                 timeout=aiohttp.ClientTimeout(total=30),
             ) as resp:
@@ -90,6 +100,7 @@ class ScorelineCoordinator(DataUpdateCoordinator):
                 async with aiohttp.ClientSession() as session:
                     async with session.ws_connect(
                         ws_url,
+                        headers=self._headers,
                         heartbeat=30,
                         timeout=aiohttp.ClientTimeout(total=0),
                     ) as ws:
@@ -140,6 +151,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         hass,
         host=entry.data[CONF_HOST],
         port=entry.data[CONF_PORT],
+        api_key=entry.data.get(CONF_API_KEY, ""),
     )
 
     await coordinator.async_config_entry_first_refresh()
