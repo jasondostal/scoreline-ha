@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/jasondostal/scoreline-ha/releases"><img src="https://img.shields.io/github/v/release/jasondostal/scoreline-ha?style=flat-square" alt="Release"></a>
-  <a href="https://github.com/hacs/integration"><img src="https://img.shields.io/badge/HACS-Custom-orange?style=flat-square" alt="HACS"></a>
+  <a href="https://www.home-assistant.io/integrations/marketplace"><img src="https://img.shields.io/badge/Marketplace-Custom-orange?style=flat-square" alt="Marketplace"></a>
   <img src="https://img.shields.io/badge/HA-2024.1+-41BDF5?style=flat-square&logo=home-assistant" alt="HA">
   <img src="https://img.shields.io/badge/iot_class-local_push-brightgreen?style=flat-square" alt="Local Push">
 </p>
@@ -15,7 +15,18 @@ WebSocket local push for instant updates. One device per WLED instance. MAC-base
 
 ## Install
 
-### HACS (Recommended)
+### Marketplace (Recommended)
+
+Home Assistant 2026.11 and newer. The Marketplace is built in and replaces HACS.
+
+1. Open Home Assistant > **Marketplace** (accept the one-time warning if you haven't yet)
+2. Open **Add from link**
+3. Paste `https://github.com/jasondostal/scoreline-ha` as the GitHub link
+4. Set the type to **Integration** > click **Add** (you'll be asked to connect GitHub the first time)
+5. Open **Scoreline** > click **Install**
+6. **Restart Home Assistant**
+
+### HACS (Home Assistant before 2026.11)
 
 1. Open Home Assistant > HACS > Integrations
 2. Click the three dots (top right) > **Custom Repositories**
